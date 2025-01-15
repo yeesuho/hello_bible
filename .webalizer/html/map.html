@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>church-map</title>
+    <script
+        src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=e7174666883617c0d5bc1cb6d1420565&libraries=services"></script>
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            width: 100%;
+            height: 100vh;
+            background-size: cover;
+            overflow: hidden;
+        }
+
+        .title {
+            z-index: 10;
+            position: absolute;
+            
+            top: -10px;
+        }
+
+        .title img {
+            width: 150px;
+        }
+
+        header {
+            margin-top: 7px;
+            position: fixed;
+            height: 100px;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, 0);
+            z-index: 10;
+            background-color: #cfc9c945;
+            width: 800px;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 0, 0, 0.07);
+            display: none;
+        }
+
+        .menuSlide {
+            width: 100%;
+            height: 20px;
+            position: fixed;
+            top: 0;
+            z-index: 5;
+            /* background-color: antiquewhite; */
+        }
+
+        .navi {
+            width: 600px;
+            float: right;
+            margin-right: 30px;
+            margin-top: -12px;
+        }
+
+        .menu li {
+            float: left;
+            width: 20%;
+            margin-right: 15px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .menu {
+            margin-top: 17px;
+            list-style: none;
+            padding: 0;
+            padding-top: 20px;
+        }
+
+        .menu li>a {
+            height: 50px;
+            line-height: 50px;
+            display: block;
+            padding: 0;
+            transition: 0.3s;
+            background-color: #ffffffdc;
+            color: #000000c7;
+            text-decoration: none;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 0, 0, 0.07);
+        }
+
+        .menu li:hover>a {
+            background-color: #3e3e3e;
+            color: aliceblue;
+            transform: scale(1.2);
+        }
+
+        .icon_menu {
+            position: fixed;
+            right: 60px;
+            bottom: 60px;
+            width: 60px;
+            height: 60px;
+            background-color: #e3e0e0;
+            border-radius: 30px;
+            border: 1px solid #3e3e3e2d;
+            z-index: 6;
+            transition: 0.5s;
+        }
+
+        .icon_menu:hover {
+            background-color: #f2f1f1;
+            transform: scale(1.2);
+        }
+
+        .icon_menu img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            cursor: pointer;
+        }
+
+        .icon {
+            position: fixed;
+            right: 60px;
+            bottom: 80px;
+            width: 60px;
+            height: 300px;
+            border-radius: 30px;
+            background-color: #f2f1f18a;
+            border: 1px solid #3e3e3e2d;
+            z-index: 5;
+            display: none;
+        }
+
+        .icon_column {
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translate(-50%);
+            width: 40px;
+            height: 200px;
+
+        }
+
+        .icon img {
+            width: 40px;
+            transition: 0.3s;
+
+        }
+
+        .icon img:hover {
+            transform: scale(1.2);
+        }
+
+        #min {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="menuSlide"></div>
+    <header>
+        <div class="title"><img src="./img/logo_누끼제거.png" alt="title"></div>
+        <div class="navi">
+            <ul class="menu">
+                <li><a href="home.html">HOME</a></li>
+                <li><a href="index.html">성경 읽기</a></li>
+                <li><a href="calender.html">캘린더</a></li>
+                <li><a href="bibleBot.html">내 친구 바이블</a></li> 
+            </ul>
+        </div>
+    </header>
+    <div class="icon_menu">
+        <img src="img/menu2.png" alt="#">
+    </div>
+    <div class="icon">
+        <div class="icon_column">
+            <a href="home.html"><img src="img/home_icon.png" alt="#"></a>
+            <a href="index.html"><img src="img/bible_icon.png" alt="#"></a>
+            <a href="map.html"><img src="img/map_icon.png" alt="#"></a>
+            <a href="calender.html"><img src="img/calendar_icon.png" alt="#"></a>
+            <a href="bibleBot.html"><img src="img/AI_icon.png" alt="#"></a>
+        </div>
+    </div>
+    <div id="map"></div>
+    <div id="min"></div>
+    <div id="result"></div>
+
+
+
+    <script src="script/jquery-1.12.4.js"></script>
+    <script>
+        $('.menuSlide').mouseenter(function () {
+            $('header').stop().slideDown()
+        })
+        $('header').click(function () {
+            $('header').stop().fadeOut()
+        })
+
+        $(document).ready(function () {
+            $(".icon_menu").css({ 'transform': 'rotate(0deg)' }); // 초기 상태 설정
+
+            $(".icon_menu").click(function () {
+                $(".icon").stop().slideToggle();
+
+                // 현재 변환 상태를 확인하여 회전 각도를 설정
+                const currentTransform = $(this).css('transform');
+                if (currentTransform === 'none' || currentTransform === 'matrix(1, 0, 0, 1, 0, 0)') {
+                    $(this).css({ 'transform': 'rotate(90deg)' });
+                } else {
+                    $(this).css({ 'transform': 'rotate(0deg)' });
+                }
+            });
+        });
+    </script>
+    <script>
+        var mapContainer = document.getElementById('map'),
+            mapOption = {
+                center: new kakao.maps.LatLng(37.538911, 126.990534), // 초기 중심 좌표
+                level: 3 // 초기 확대 레벨
+            };
+
+        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+        var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
+        var ps = new kakao.maps.services.Places(map);
+        var markers = []; // 마커를 담을 배열입니다
+
+        // 현재 위치 마커 표시
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var lat = position.coords.latitude, // 위도
+                    lon = position.coords.longitude; // 경도
+
+                var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치
+                    message = '<div style="padding:5px;">당신의 위치인가요?!</div>'; // 인포윈도우에 표시될 내용
+
+                // 마커와 인포윈도우를 표시합니다
+                displayMarker({ Ma: lat, La: lon, place_name: "내 위치" }, message);
+                map.setCenter(locPosition); // 지도 중심좌표를 접속위치로 변경합니다
+
+                // 현재 위치 주변에 교회 검색
+                ps.keywordSearch('교회', placesSearchCB, {
+                    location: locPosition,
+                    radius: 1000 // 반경 1000m 이내에서 검색
+                });
+            });
+        } else {
+            var locPosition = new kakao.maps.LatLng(37.538911, 126.990534),
+                message = 'geolocation을 사용할수 없어요..';
+
+            displayMarker(locPosition, message);
+        }
+
+        // 지도에 마커와 인포윈도우를 표시하는 함수입니다
+        function displayMarker(input, message) {
+            var lat, lng;
+
+            // input이 place 객체일 때
+            if (input.y && input.x) {
+                lat = input.y; // 위도
+                lng = input.x; // 경도
+            }
+            // input이 locPosition일 때
+            else if (input.Ma && input.La) {
+                lat = input.Ma; // 위도
+                lng = input.La; // 경도
+            }
+            // input이 LatLng 객체일 때
+            else if (input instanceof kakao.maps.LatLng) {
+                lat = input.getLat(); // 위도
+                lng = input.getLng(); // 경도
+            }
+            else {
+                console.error('Invalid input:', input);
+                return; // 잘못된 입력 처리
+            }
+
+            // 마커 생성
+            var marker = new kakao.maps.Marker({
+                map: map,
+                position: new kakao.maps.LatLng(lat, lng) // 위도와 경도를 사용
+            });
+
+            // 인포윈도우 내용 설정
+            var iwContent = message || input.place_name; // message가 없으면 place_name 사용
+            var iwRemoveable = true;
+
+            // 인포윈도우 생성
+            var infowindow = new kakao.maps.InfoWindow({
+                content: iwContent,
+                removable: iwRemoveable
+            });
+
+            // 마커에 인포윈도우 표시
+            infowindow.open(map, marker); // 마커 생성 시 인포윈도우를 즉시 열기
+
+            // 마커 클릭 시 인포윈도우 표시 및 경로 표시
+            kakao.maps.event.addListener(marker, 'click', function () {
+                infowindow.setContent('<div style="padding:5px;font-size:12px;">' + (input.place_name || '위치 정보 없음') + '</div>');
+                infowindow.open(map, marker);
+                showDirections({ Ma: lat, La: lng }); // 경로 표시
+            });
+
+            markers.push(marker); // 마커 배열에 추가
+        }
+
+        // 장소 검색 콜백 함수
+        function placesSearchCB(data, status, pagination) {
+            if (status === kakao.maps.services.Status.OK) {
+                for (var i = 0; i < data.length; i++) {
+                    var place = data[i];
+                    var message = '<div style="padding:5px;">' + place.place_name + '</div>'; // 인포윈도우에 표시할 내용
+                    displayMarker(place, message); // 마커 표시 함수 호출
+                }
+            } else {
+                console.error('검색 실패:', status);
+            }
+        }
+
+        var currentPosition = null; // 현재 위치 저장 변수
+        var activePolyline = null; // 현재 표시된 Polyline 저장 변수
+
+        // 초기화: 현재 위치 가져오기
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var lat = position.coords.latitude; // 위도
+                var lon = position.coords.longitude; // 경도
+
+                // 현재 위치를 저장
+                currentPosition = new kakao.maps.LatLng(lat, lon);
+
+                // 지도 중심을 현재 위치로 설정
+                map.setCenter(currentPosition);
+
+                // 현재 위치에 마커 표시
+                displayMarker({ Ma: lat, La: lon, place_name: "내 위치" }, '<div style="padding:5px;">현재 위치</div>');
+            }, function (error) {
+                console.error('위치 정보를 가져올 수 없습니다:', error);
+                alert('위치 정보를 사용할 수 없어 기본 위치로 설정합니다.');
+                // 위치 정보를 가져오지 못한 경우 기본값 설정
+                currentPosition = new kakao.maps.LatLng(37.538911, 126.990534); // 서울 중심 좌표
+                map.setCenter(currentPosition);
+            });
+        } else {
+            alert('브라우저에서 위치 정보를 사용할 수 없습니다.');
+            currentPosition = new kakao.maps.LatLng(37.538911, 126.990534); // 기본값 설정
+            map.setCenter(currentPosition);
+        }
+
+        // 경로 표시 함수 (현재 위치에서 시작)
+        function showDirections(destination) {
+            if (!currentPosition) {
+                alert('현재 위치를 가져오는 중입니다. 잠시 후 다시 시도해주세요.');
+                return;
+            }
+
+            var start = {
+                x: currentPosition.getLng(), // 저장된 현재 위치의 경도
+                y: currentPosition.getLat()  // 저장된 현재 위치의 위도
+            };
+            var end = {
+                x: destination.La, // 목적지 경도
+                y: destination.Ma  // 목적지 위도
+            };
+
+            // REST API 요청을 위한 URL 생성
+            var url = `https://apis-navi.kakaomobility.com/v1/directions?origin=${start.x},${start.y}&destination=${end.x},${end.y}&priority=RECOMMEND`;
+
+            // REST API 호출
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    Authorization: 'KakaoAK 3ccec2c5f7f5dbed75173797e299de4e' // REST API 키 입력
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.routes && data.routes[0]) {
+                        // 경로 데이터 가져오기
+                        var path = data.routes[0].sections[0].roads.flatMap(road =>
+                            road.vertexes.reduce((points, value, index) => {
+                                if (index % 2 === 0) {
+                                    points.push(new kakao.maps.LatLng(road.vertexes[index + 1], value));
+                                }
+                                return points;
+                            }, [])
+                        );
+
+                        // Polyline 객체 생성
+                        var polyline = new kakao.maps.Polyline({
+                            path: path,
+                            strokeWeight: 5,
+                            strokeColor: '#FF0000',
+                            strokeOpacity: 0.7,
+                            strokeStyle: 'solid'
+                        });
+
+                        // Polyline 토글 처리
+                        if (activePolyline) {
+                            activePolyline.setMap(null); // 기존 Polyline 제거
+                            activePolyline = null;
+                            document.getElementById('min').innerHTML = ''; // 소요 시간도 숨김
+                        } else {
+                            polyline.setMap(map); // 새로운 Polyline 표시
+                            activePolyline = polyline;
+
+                            // 소요 시간 표시
+                            var timeInSeconds = data.routes[0].sections[0].duration; // 소요 시간 (초 단위)
+                            var timeInMinutes = Math.ceil(timeInSeconds / 60); // 분 단위로 변환
+                            var resultDiv = document.getElementById('min');
+                            resultDiv.innerHTML = '걸어서 약 ' + timeInMinutes + '분 소요됩니다!';
+                        }
+                    } else {
+                        console.error('경로 데이터가 없습니다:', data);
+                    }
+                })
+                .catch(error => console.error('경로 표시 중 오류 발생:', error));
+        }
+
+
+
+
+        // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+        var mapTypeControl = new kakao.maps.MapTypeControl();
+        map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+
+        // 지도 확대 축소를 제어할 수 있는 줌 컨트롤을 생성합니다
+        var zoomControl = new kakao.maps.ZoomControl();
+        map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+        // 지도가 확대 또는 축소되면 이벤트를 등록합니다
+        kakao.maps.event.addListener(map, 'zoom_changed', function () {
+            var level = map.getLevel();
+            var message = '현재 지도 레벨은 ' + level + ' 입니다';
+            var resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = message;
+        });
+
+
+    </script>
+
+
+</body>
+
+</html>

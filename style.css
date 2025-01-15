@@ -1,0 +1,354 @@
+body {
+    overflow: hidden;
+    height: 100vh;
+    background: url(img/배경3.jpg) center;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.title {
+    z-index: 10;
+    position: absolute;
+    left: 20px;
+    top: -10px;
+}
+
+.title img {
+    width: 150px;
+}
+
+header {
+    margin-top: 7px;
+    position: fixed;
+    height: 100px;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 10;
+    background-color: #cfc9c945;
+    width: 800px;
+    border-radius: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    /* display: none; */
+}
+
+.menuSlide {
+    width: 100%;
+    height: 20px;
+    position: fixed;
+    top: 0;
+    z-index: 5;
+    /* background-color: antiquewhite; */
+}
+
+.navi {
+    width: 600px;
+    float: right;
+    margin-right: 60px;
+    margin-top: -12px;
+}
+
+.menu li {
+    float: left;
+    width: 30%;
+    margin-right: 15px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.menu {
+    margin-top: 17px;
+    list-style: none;
+    padding: 0;
+    padding-top: 20px;
+}
+
+.menu li>a {
+    height: 50px;
+    line-height: 50px;
+    display: block;
+    padding: 0;
+    transition: 0.3s;
+    background-color: #ffffffdc;
+    color: #000000c7;
+    text-decoration: none;
+    border-radius: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.menu li:hover>a {
+    background-color: #3e3e3e;
+    color: aliceblue;
+    transform: scale(1.2);
+}
+
+.icon_menu {
+    position: fixed;
+    right: 60px;
+    bottom: 60px;
+    width: 60px;
+    height: 60px;
+    background-color: #e3e0e0;
+    border-radius: 30px;
+    border: 1px solid #3e3e3e2d;
+    z-index: 6;
+    transition: 0.5s;
+}
+
+.icon_menu:hover {
+    background-color: #f2f1f1;
+    transform: scale(1.2);
+}
+
+.icon_menu img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    cursor: pointer;
+}
+
+.icon {
+    position: fixed;
+    right: 60px;
+    bottom: 80px;
+    width: 60px;
+    height: 300px;
+    border-radius: 30px;
+    background-color: #f2f1f18a;
+    border: 1px solid #3e3e3e2d;
+    z-index: 5;
+    display: none;
+}
+
+.icon_column {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translate(-50%);
+    width: 40px;
+    height: 200px;
+
+}
+
+.icon img {
+    width: 40px;
+    transition: 0.3s;
+
+}
+
+.icon img:hover {
+    transform: scale(1.2);
+}
+
+p {
+    text-align: center;
+    font-family: "Nanum Myeongjo", serif;
+    font-weight: 500;
+    font-style: normal;
+    font-weight: bold;
+}
+
+.navi {
+    width: 600px;
+    float: right;
+    margin-right: 20px;
+    margin-top: -10px;
+
+}
+
+.menu li {
+    float: left;
+    /* float: left; */
+    /* width: 150px; */
+    width: 20%;
+    margin-right: 15px;
+    box-sizing: border-box;
+    text-align: center;
+
+}
+
+.menu {
+
+    list-style: none;
+    padding: 0;
+    padding-top: 20px;
+}
+
+.menu li>a {
+    height: 50px;
+    line-height: 50px;
+    display: block;
+    /* padding: 5px; */
+    padding: 0;
+    transition: 1s;
+    background-color: #f0ecec;
+    color: #000000c7;
+    /* font-style: italic; */
+    transition: transform 0.3s;
+    text-decoration: none;
+    border-radius: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.menu li:hover>a {
+    background-color: #535353;
+    color: aliceblue;
+    /* text-decoration: underline; */
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    /* IE 9 */
+    -o-transform: scale(1.2);
+    /* transition: transform 0.1s; */
+}
+
+#index {
+    font-size: 11px;
+    text-decoration: none;
+    color: black;
+}
+
+.old,
+.new {
+    margin-left: 50px;
+    margin-top: -45px;
+}
+
+.old1,
+.new1 {
+    margin-top: 60px;
+
+}
+
+.old2 {
+    margin-left: 140px;
+    margin-top: -475px;
+}
+
+.new2 {
+    margin-left: 140px;
+    margin-top: -353px;
+}
+
+#index p {
+    width: 150px;
+    transition: 0.3s;
+    border-radius: 15px;
+}
+
+#index:hover>p {
+    background-color: rgb(239, 238, 222);
+    -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    -moz-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    -ms-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    -o-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.box {
+    margin: 0 auto;
+
+    width: 290px;
+}
+
+.go {
+    margin-top: 100px;
+
+}
+
+.sado {
+    line-height: 30px;
+}
+
+.gido {
+    line-height: 40px;
+}
+
+#i1 {
+    text-align: center;
+    box-shadow: 10px 5px 15px rgba(0, 0, 0, 0.5);
+    background-size: 400px 560px;
+    
+    /* 더 부드러운 그림자 */
+}
+#i2 {
+    background-size: 400px 560px;
+}
+
+#book {
+    border: 1px solid black;
+    border-radius: 15px;
+    margin: 5% auto;
+    top: 15%;
+    left: -200px;
+    box-shadow: 1px 1px 20px black;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    /* 그림자 및 변환 효과 */
+    overflow: hidden;
+    /* 자식 요소가 넘치는 것을 숨김 */
+    z-index: 1;
+    transition: 0.5s;
+    -ms-overflow-style: none;
+
+}
+
+
+#book img {
+    width: 100px;
+}
+
+#bible {
+    border-radius: 0 15px 15px 0;
+    position: absolute;
+    top: 8.5%;
+    left: 50%;
+    width: 410px;
+    height: 555px;
+    background-color: rgb(210, 210, 210);
+    z-index: 0;
+    border: 1px solid rgba(0, 0, 0, 0.171);
+}
+
+#book .turn-page {
+    box-shadow: inherit 0 0 10px rgb(0, 0, 0);
+    /* 페이지 내부 그림자 추가 */
+
+    transform-style: preserve-3d;
+    /* 3D 효과 유지 */
+}
+
+.end_img {
+    margin-top: 130px;
+    text-align: center;
+}
+
+#book div {
+    /* -webkit-background-size: cover; */
+    /* background-size: cover; */
+    background-position: center center;
+}
+
+.bible_box {
+    margin: 20px auto;
+    width: 300px;
+    height: 500px;
+    overflow: scroll;
+    -ms-overflow-style: none;
+
+}
+.bible_box::-webkit-scrollbar {
+    display: none;
+  }
+  
+html {
+    scroll-behavior: smooth;
+}
+
+a {
+    z-index: 10;
+}

@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Gugi&family=Nanum+Myeongjo&family=Noto+Sans+KR:wght@100..900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: aliceblue;
+            font-family: "Noto Sans KR", sans-serif;
+            font-optical-sizing: auto;
+            font-style: normal;
+            font-size: 16px;
+        }
+
+        p {
+            font-family: "Noto Sans KR", sans-serif;
+            font-optical-sizing: auto;
+            font-style: normal;
+            font-size: 20px;
+        }
+
+        .container {
+            width: 100%;
+            /* height: 350px; */
+            
+        }
+
+        .logo {
+            position: absolute;
+
+            top: -10px;
+            left: 40px;
+            z-index: 1;
+        }
+
+        .logo img {
+            width: 200px;
+        }
+
+        .navi {
+            position: absolute;
+            z-index: 1;
+            /* width: 1080px; */
+            width: 90%;
+            left: 140px;
+            top: 20px;
+
+        }
+
+        .menu li {
+            margin-left: 100px;
+            margin-top: 30px;
+            text-align: center;
+            float: left;
+            /* width: 153px; */
+            width: 14%;
+            list-style: none;
+
+        }
+
+        .menu li>a {
+            display: block;
+            padding: 5px;
+            transition: 0.3s;
+            font-size: 20px;
+            border-radius: 15px;
+        }
+
+        .menu li:hover>a {
+            transform: scale(1.2);
+            -webkit-transform: scale(1.2);
+            -moz-transform: scale(1.2);
+            -ms-transform: scale(1.2);
+            /* IE 9 */
+            -o-transform: scale(1.2);
+            background: rgb(247, 116, 96);
+            background: linear-gradient(138deg, rgba(247, 116, 96, 1) 0%, rgba(245, 184, 136, 1) 35%, rgba(147, 194, 99, 1) 64%, rgba(167, 119, 76, 1) 100%);
+            color: #090e3a;
+            box-shadow: 0px 8px 6px -6px #666
+        }
+
+        #m1 {
+            margin-left: 150px;
+        }
+
+        #m3 {
+            margin-left: 100px;
+            margin-right: 15px;
+        }
+
+        #m6 {
+            margin-left: 30px;
+        }
+
+        video {
+            width: 100%;
+            height: 100vh;
+            object-fit: cover;
+        }
+
+        .content {
+            word-spacing: 2px;
+            overflow: hidden;
+        }
+
+        h2 {
+            top: 210px;
+
+        }
+
+        h3 {
+            top: 280px;
+
+        }
+
+        h2,
+        h3 {
+            position: absolute;
+            right: 50px;
+        }
+
+        h1 {
+            text-align: center;
+            font-family: "Noto Sans KR", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 300;
+            font-style: normal;
+        }
+
+        .title {
+            margin: 0;
+            font-size: 3rem;
+            color: rgb(255, 255, 255);
+            font-family: "Noto Sans KR", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 20;
+            font-style: normal;
+        }
+
+        .line {
+            position: absolute;
+            top: 130px;
+            left: 50px;
+            width: 92%;
+            height: 2px;
+            background-color: aliceblue;
+        }
+
+        .text {
+            margin-top: 50px;
+
+        }
+
+        .text-line {
+            position: absolute;
+            width: 260px;
+            height: 1px;
+            background-color: aliceblue;
+            right: 50px;
+            top: 283px;
+            animation: goRight 1.5s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+        }
+
+        header {
+            position: absolute;
+            width: 100%;
+            height: 100px;
+            background-color: rgba(250, 235, 215, 0);
+        }
+
+        .letter {
+
+            display: inline-block;
+            animation: up 2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+        }
+
+        .sub-letter {
+            display: inline-block;
+            animation: up 3.5s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+        }
+
+        @keyframes goRight {
+            0% {
+                transform: translateX(200%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes up {
+            0% {
+                transform: translateY(100%);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        button {
+            margin: 10px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #fff;
+            border-radius: 10px;
+            transition: 0.3s;
+            box-sizing: border-box;
+            /* box-shadow: inset 0 0 10px #dcdcdc; */
+            box-shadow: 5px 5px 15px #9f9f9f;
+            font-family: "Noto Sans KR", sans-serif;
+            font-optical-sizing: auto;
+            font-style: normal;
+            font-size: 16px;
+        }
+
+        button a {
+            color: #000;
+        }
+
+        button:hover {
+            transform: scale(1.2);
+            -webkit-transform: scale(1.2);
+            -moz-transform: scale(1.2);
+            -ms-transform: scale(1.2);
+            /* IE 9 */
+            -o-transform: scale(1.2);
+            border: 3px solid rgb(255, 255, 255);
+            cursor: pointer;
+            box-shadow: 7px 7px 20px #d7d6d6;
+        }
+
+        .goto {
+            display: flex;
+            margin-top: 100px;
+        }
+
+        #collect {
+            justify-content: space-between;
+            text-align: center;
+            width: 200px;
+            height: 250px;
+        }
+
+        .slider {
+            width: 100%;
+            height: 600px;
+            background-color: rgb(255, 255, 255);
+        }
+
+        #gallery-slide {
+            position: relative;
+            width: 600px;
+            height: 400px;
+            margin: 10vh;
+            overflow: hidden;
+            border: 2px solid #0000001a;
+            box-shadow: 7px 7px 20px #d7d6d6;
+            top: 40px;
+            border-radius: 5px;
+        }
+
+        #gallery-slide img {
+            width: 600px;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .slide-btn::after {
+            opacity: 0;
+            transition: all 0.8s;
+        }
+
+        .slide-btn {
+            font-size: 50px;
+            color: #ffffff;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            width: 15%;
+            height: 100%;
+            top: 0;
+            padding: 20px;
+            cursor: pointer;
+        }
+
+        .btn-left {
+            left: -50px;
+            ;
+            flex-direction: row;
+
+        }
+
+        .btn-right {
+            right: -50px;
+            flex-direction: row-reverse;
+        }
+
+
+        #gallery-slide>ul {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-wrap: nowrap;
+            left: -646px;
+        }
+
+        #gallery-slide li {
+            position: relative;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: 0.5s;
+            /* animation: slide 10s linear infinite; */
+        }
+
+
+
+        .con {
+            margin-top: 70px;
+        }
+
+
+
+        .slide-text {
+            width: 100%;
+            display: flex;
+            
+        }
+
+        .text-box {
+            width: 32%;
+            position: absolute;
+            left: 800px;
+            margin: 200px auto;
+        }
+
+        .text-box h1 {
+            float: left;
+        }
+
+        .text-box p {
+            font-family: "Noto Sans KR", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 200;
+            font-style: normal;
+            font-size: 20px;
+            float: left;
+            margin-top: 20px;
+
+        }
+
+        .text-box b {
+            color: #000;
+            font-family: "Noto Sans KR", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 500;
+            font-style: normal;
+            font-size: 16px;
+            float: left;
+            margin-top: 20px;
+        }
+
+        .down {
+            float: left;
+            width: 200px;
+        }
+
+        .model {
+            width: 100%;
+            height: 80px;
+            border-top: 1px solid #e9e7e7;
+        }
+
+        .model b {
+            margin-left: 20px;
+        }
+
+        .model-text {
+            margin-top: 25px;
+            margin-left: 50px;
+        }
+
+        .first {
+            color: #000;
+            font-family: "Noto Sans KR", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 100;
+            font-style: normal;
+            font-size: 14px;
+        }
+
+        .last {
+            color: #000;
+            font-family: "Noto Sans KR", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 16px;
+        }
+
+
+
+        .copyright-text {
+            margin-top: 50px;
+        }
+
+        .copyright-text b {
+            margin-left: 50px;
+            color: #000;
+            font-family: "Noto Sans KR", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 200;
+            font-style: normal;
+            font-size: 20px;
+        }
+
+        .contect {
+            display: inline-block;
+            margin-left: 67%;
+        }
+
+        .contect b {
+            margin-left: 10px;
+            color: #000;
+            font-family: "Noto Sans KR", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 15px;
+        }
+
+        .icon_menu {
+            position: fixed;
+            right: 60px;
+            bottom: 60px;
+            width: 60px;
+            height: 60px;
+            background-color: #e3e0e0;
+            border-radius: 30px;
+            border: 1px solid #3e3e3e2d;
+            z-index: 6;
+            transition: 0.5s;
+        }
+
+        .icon_menu:hover {
+            background-color: #f2f1f1;
+            transform: scale(1.2);
+        }
+
+        .icon_menu img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            cursor: pointer;
+        }
+
+        .icon {
+            position: fixed;
+            right: 60px;
+            bottom: 80px;
+            width: 60px;
+            height: 300px;
+            border-radius: 30px;
+            background-color: #f2f1f18a;
+            border: 1px solid #3e3e3e2d;
+            z-index: 5;
+            display: none;
+        }
+
+        .icon_column {
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translate(-50%);
+            width: 40px;
+            height: 200px;
+
+        }
+
+        .icon img {
+            width: 40px;
+            transition: 0.3s;
+
+        }
+
+        .icon img:hover {
+            transform: scale(1.2);
+        }
+
+    
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <header class="header">
+            <div class="logo"><a href="#"><img src="img/logo_누끼제거.png" alt="#"></a></div>
+            <div class="navi">
+                <ul class="menu">
+                    <li id="m1">
+                        <a href="index.html">성경 읽기</a>
+                    </li>
+                    <li id="m2">
+                        <a href="map.html">주변 교회 길찾기</a>
+                    </li>
+                    <li id="m3">
+                        <a href="calender.html">캘린더</a>
+                    </li>
+                    <li id="m4">
+                        <a href="bibleBot.html">내 친구 바이블</a>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="line"></div>
+        </header>
+
+        <h2 class="title content">
+            <span class="letter">Hello Bible!</span>
+        </h2>
+        <div class="text-line"></div>
+        <h3 class="title content">
+            <span class="sub-letter">온라인 성경</span>
+        </h3>
+
+
+        <video src="https://cdn.pixabay.com/video/2016/06/27/3565-172488151_small.mp4" muted autoplay loop></video>
+
+        <div class="container">
+            <h1 class="text">스마트한 온라인 성경책</h1>
+            <div class="goto">
+                <div id="collect" class="drive">
+                    <img src="img/bible_icon.png" alt="" style="width: 60px;">
+                    <p>웹 성경책</p>
+                    <button><a href="index.html">바로가기</a></button>
+                </div>
+                <div id="collect" class="make">
+                    <img src="img/map_icon.png" alt="" style="width: 60px;">
+                    <p>주변 교회 길찾기</p>
+                    <button><a href="map.html">바로가기</a></button>
+                </div>
+                <div id="collect" class="online">
+                    <img src="img/calendar_icon.png" alt="" style="width: 50px;">
+                    <p>캘린더</p>
+                    <button><a href="calender.html">바로가기</a></button>
+                </div>
+                <div id="collect" class="online">
+                    <img src="img/AI_icon.png" alt="" style="width: 60px;">
+                    <p>나의 친구봇</p>
+                    <button><a href="bibleBot.html">바로가기</a></button>
+                </div>
+            </div>
+            
+            <div class="slide-text">
+                <div class="slider">
+                    <div id="gallery-slide">
+                        <ul>
+                            <li class="slide-box"><img src="img/index.png" alt="slide01"></li>
+                            <li class="slide-box"><img src="img/map.png" alt="slide02"></li>
+                            <li class="slide-box"><img src="img/calendar.png" alt="slide03"></li>
+                            <li class="slide-box"><img src="img/ai_biblebot.png" alt="slide04"></li>
+                        </ul>
+                        <!-- div.slide-btn.btn-left>span -->
+                        <div class="slide-btn btn-left">
+                            <span class="material-symbols-outlined-left">〈</span>
+                        </div>
+                        <div class="slide-btn btn-right">
+                            <span class="material-symbols-outlined-right">〉</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-box">
+                    <h1>사용 설명서</h1>
+                    <p>나에게 맞는 기능을 확인하고 부담 없이 사용해보세요.</p>
+                    <div class="down">
+                        <a href="intro.html"><b>자세한 설명 보기
+                                ↗</b></a>
+
+                    </div>
+                </div>
+            </div>
+            <div class="model">
+                <div class="model-text">
+                    <b class="first">Made with suho, jaehyek, and dojin</b>
+                    <a href="index.html"><b class="last">메인</b></a>
+                </div>
+            </div>
+            <div class="icon_menu">
+                <img src="img/menu2.png" alt="#">
+            </div>
+            <div class="icon">
+                <div class="icon_column">
+                    <a href="home.html"><img src="img/home_icon.png" alt="#"></a>
+                    <a href="index.html"><img src="img/bible_icon.png" alt="#"></a>
+                    <a href="map.html"><img src="img/map_icon.png" alt="#"></a>
+                    <a href="calender.html"><img src="img/calendar_icon.png" alt="#"></a>
+                    <a href="bibleBot.html"><img src="img/AI_icon.png" alt="#"></a>
+                </div>
+            </div>
+        </div>
+        <script src="script/jquery-1.12.4.js"></script>
+        <script src="script/script.js"></script>
+        <script>
+            $(document).ready(function () {
+                $(".icon_menu").css({ 'transform': 'rotate(0deg)' }); // 초기 상태 설정
+
+                $(".icon_menu").click(function () {
+                    $(".icon").stop().slideToggle();
+
+                    // 현재 변환 상태를 확인하여 회전 각도를 설정
+                    const currentTransform = $(this).css('transform');
+                    if (currentTransform === 'none' || currentTransform === 'matrix(1, 0, 0, 1, 0, 0)') {
+                        $(this).css({ 'transform': 'rotate(90deg)' });
+                    } else {
+                        $(this).css({ 'transform': 'rotate(0deg)' });
+                    }
+                });
+            });
+
+
+        </script>
+</body>
+
+</html>

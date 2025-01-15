@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> introduce</title>
+    <style>
+        body {
+            overflow: hidden;
+            height: 100vh;
+            background: url(img/배경디자인.jpg) center;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            background-color: antiquewhite;
+            width: 600px;
+            height: 800px;
+            margin: 5% auto;
+            box-shadow: 5px 5px 10px #666;
+            border-radius: 5px;
+        }
+
+        .inner_box {
+            position: absolute;
+            top: 400px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+
+        }
+
+        .title {
+            z-index: 10;
+            position: absolute;
+
+            top: -10px;
+        }
+
+        .title img {
+            width: 150px;
+        }
+
+        header {
+            margin-top: 7px;
+            position: fixed;
+            height: 100px;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, 0);
+            z-index: 10;
+            background-color: #cfc9c945;
+            width: 800px;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 0, 0, 0.07);
+            display: none;
+        }
+
+        .menuSlide {
+            width: 100%;
+            height: 20px;
+            position: fixed;
+            top: 0;
+            z-index: 5;
+            /* background-color: antiquewhite; */
+        }
+
+        .navi {
+            width: 600px;
+            float: right;
+            margin-right: 30px;
+            margin-top: -12px;
+        }
+
+        .menu li {
+            float: left;
+            width: 20%;
+            margin-right: 15px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .menu {
+            margin-top: 17px;
+            list-style: none;
+            padding: 0;
+            padding-top: 20px;
+        }
+
+        .menu li>a {
+            height: 50px;
+            line-height: 50px;
+            display: block;
+            padding: 0;
+            transition: 0.3s;
+            background-color: #ffffffdc;
+            color: #000000c7;
+            text-decoration: none;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 0, 0, 0.07);
+        }
+
+        .menu li:hover>a {
+            background-color: #3e3e3e;
+            color: aliceblue;
+            transform: scale(1.2);
+        }
+
+        .icon_menu {
+            position: fixed;
+            right: 60px;
+            bottom: 60px;
+            width: 60px;
+            height: 60px;
+            background-color: #e3e0e0;
+            border-radius: 30px;
+            border: 1px solid #3e3e3e2d;
+            z-index: 6;
+            transition: 0.5s;
+        }
+
+        .icon_menu:hover {
+            background-color: #f2f1f1;
+            transform: scale(1.2);
+        }
+
+        .icon_menu img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            cursor: pointer;
+        }
+
+        .icon {
+            position: fixed;
+            right: 60px;
+            bottom: 80px;
+            width: 60px;
+            height: 300px;
+            border-radius: 30px;
+            background-color: #f2f1f18a;
+            border: 1px solid #3e3e3e2d;
+            z-index: 5;
+            display: none;
+        }
+
+        .icon_column {
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translate(-50%);
+            width: 40px;
+            height: 200px;
+
+        }
+
+        .icon img {
+            width: 40px;
+            transition: 0.3s;
+
+        }
+
+        .icon img:hover {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="menuSlide"></div>
+    <header>
+        <div class="title"><img src="./img/logo_누끼제거.png" alt="title"></div>
+        <div class="navi">
+            <ul class="menu">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="main.html">성경 읽기</a></li>
+                <li><a href="map.html">주변 교회 찾기</a></li>
+                <li><a href="calender.html">캘린더</a></li>
+            </ul>
+        </div>
+    </header>
+    <div class="icon_menu">
+        <img src="img/menu2.png" alt="#">
+    </div>
+    <div class="icon">
+        <div class="icon_column">
+            <a href="home.html"><img src="img/home_icon.png" alt="#"></a>
+            <a href="index.html"><img src="img/bible_icon.png" alt="#"></a>
+            <a href="map.html"><img src="img/map_icon.png" alt="#"></a>
+            <a href="calender.html"><img src="img/calendar_icon.png" alt="#"></a>
+            <a href="bibleBot.html"><img src="img/AI_icon.png" alt="#"></a>
+        </div>
+    </div>
+    <div class="box">
+        <div class="inner_box">
+            <h1>기능 설명</h1>
+            <p>저희 헬로바이블 팀은 저희 학교가 기독교 학교이다 보니 종교와 관련된 웹사이트를 만들어 보고 싶었습니다.</p>
+            <p>웹성경책은 다양한 기능으로 구성된 플랫폼으로, 사용자가 성경을 쉽게 활용할 수 있도록 돕습니다.</p>
+            <p>첫째, 웹페이지를 설명하는 홈페이지가 있어 전체적인 구조와 기능을 안내하고 이 웹사이트가 있어야 하는 이유를 설명합니다.</p>
+            <p>둘째, 성경책을 웹에서 책 처럼 넘길 수 있는 메인 페이지는 사용자가 편리하게 성경을 읽고 탐색할 수 있도록 설계되었습니다.</p>
+            <p>셋째, 성경에 관한 내용을 제공하는 친구 같은 AI가 탑재된 페이지는 사용자에게 성경의 의미와 해석을 쉽게 설명하며, 질문에 대한 답변도 제공합니다.</p>
+            <p>넷째, 사용자의 현재 위치에서 주변에 있는 교회까지의 경로를 안내하는 페이지는 유용한 도구입니다.</p>
+            <p>마지막으로, 개인의 오늘 할 일을 기록할 수 있는 캘린더 페이지는 일상적인 계획을 세우고 목표를 관리하는 데 도움을 줍니다.</p>
+        </div>
+    </div>
+    <script src="script/jquery-1.12.4.js"></script>
+    <script>
+        $('.menuSlide').mouseenter(function () {
+            $('header').stop().slideDown()
+        })
+        $('header').click(function () {
+            $('header').stop().fadeOut()
+        })
+
+        $(document).ready(function () {
+            $(".icon_menu").css({ 'transform': 'rotate(0deg)' }); // 초기 상태 설정
+
+            $(".icon_menu").click(function () {
+                $(".icon").stop().slideToggle();
+
+                // 현재 변환 상태를 확인하여 회전 각도를 설정
+                const currentTransform = $(this).css('transform');
+                if (currentTransform === 'none' || currentTransform === 'matrix(1, 0, 0, 1, 0, 0)') {
+                    $(this).css({ 'transform': 'rotate(90deg)' });
+                } else {
+                    $(this).css({ 'transform': 'rotate(0deg)' });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

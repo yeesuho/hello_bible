@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calender</title>
+    <script src='script/index.global.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.7/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.7/locales/ko.global.min.js"></script>
+    <style>
+        body {
+            margin: 40px 10px;
+            padding: 0;
+            font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+            font-size: 14px;
+            background: rgb(81, 89, 98);
+            background: linear-gradient(0deg, rgb(230, 232, 250) 0%, rgb(247, 248, 228) 100%);
+        }
+
+        .fc-col-header,.fc-event,.fc-scroller {
+            background-color: #fff;
+        }
+        
+        #calendar {
+            max-width: 70%;
+            height: 80vh;
+            margin: 0 auto;
+            margin-top: 150px;
+        }
+
+        .title {
+            z-index: 10;
+            position: absolute;
+
+            top: -10px;
+        }
+
+        .title img {
+            width: 150px;
+        }
+
+        header {
+            margin-top: 7px;
+            position: fixed;
+            height: 100px;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, 0);
+            z-index: 10;
+            background-color: #cfc9c945;
+            width: 800px;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 0, 0, 0.07);
+
+        }
+
+        .menuSlide {
+            width: 100%;
+            height: 20px;
+            position: fixed;
+            top: 0;
+            z-index: 5;
+            /* background-color: antiquewhite; */
+        }
+
+        .navi {
+            width: 600px;
+            float: right;
+            margin-right: 30px;
+            margin-top: -12px;
+        }
+
+        .menu li {
+            float: left;
+            width: 20%;
+            margin-right: 15px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .menu {
+            margin-top: 17px;
+            list-style: none;
+            padding: 0;
+            padding-top: 20px;
+        }
+
+        .menu li>a {
+            height: 50px;
+            line-height: 50px;
+            display: block;
+            padding: 0;
+            transition: 0.3s;
+            background-color: #ffffffdc;
+            color: #000000c7;
+            text-decoration: none;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 0, 0, 0.07);
+        }
+
+        .menu li:hover>a {
+            background-color: #3e3e3e;
+            color: aliceblue;
+            transform: scale(1.2);
+        }
+
+        .icon_menu {
+            position: fixed;
+            right: 60px;
+            bottom: 60px;
+            width: 60px;
+            height: 60px;
+            background-color: #e3e0e0;
+            border-radius: 30px;
+            border: 1px solid #3e3e3e2d;
+            z-index: 6;
+            transition: 0.5s;
+        }
+
+        .icon_menu:hover {
+            background-color: #f2f1f1;
+            transform: scale(1.2);
+        }
+
+        .icon_menu img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            cursor: pointer;
+        }
+
+        .icon {
+            position: fixed;
+            right: 60px;
+            bottom: 80px;
+            width: 60px;
+            height: 300px;
+            border-radius: 30px;
+            background-color: #f2f1f18a;
+            border: 1px solid #3e3e3e2d;
+            z-index: 5;
+            display: none;
+        }
+
+        .icon_column {
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translate(-50%);
+            width: 40px;
+            height: 200px;
+
+        }
+
+        .icon img {
+            width: 40px;
+            transition: 0.3s;
+
+        }
+
+        .icon img:hover {
+            transform: scale(1.2);
+        }
+
+        /* 모든 버튼 스타일 변경 */
+        button[data-action] {
+            background-color: #4CAF50;
+            /* 초록색 */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        /* 버튼에 마우스를 올릴 때 */
+        button[data-action]:hover {
+            background-color: #45a049;
+            /* 더 밝은 초록색 */
+        }
+
+        /* 오늘 버튼 스타일 */
+        button[data-action="today"] {
+            background-color: #FFC107;
+            /* 노란색 */
+            color: black;
+        }
+
+        /* 이전/다음 버튼 스타일 */
+        button[data-action="prev"],
+        button[data-action="next"] {
+            background-color: #D32F2F;
+            /* 빨간색 */
+            color: white;
+        }
+
+        /* 이전/다음 버튼 마우스오버 */
+        button[data-action="prev"]:hover,
+        button[data-action="next"]:hover {
+            background-color: #B71C1C;
+            /* 더 진한 빨간색 */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="menuSlide"></div>
+    <header>
+        <div class="title"><img src="./img/logo_누끼제거.png" alt="title"></div>
+        <div class="navi">
+            <ul class="menu">
+                <li><a href="home.html">HOME</a></li>
+                <li><a href="index.html">성경 읽기</a></li>
+                <li><a href="map.html">주변 교회 길찾기</a></li>
+                <li><a href="bibleBot.html">내 친구 바이블</a></li>
+            </ul>
+        </div>
+    </header>
+    <div class="icon_menu">
+        <img src="img/menu2.png" alt="#">
+    </div>
+    <div class="icon">
+        <div class="icon_column">
+            <a href="home.html"><img src="img/home_icon.png" alt="#"></a>
+            <a href="index.html"><img src="img/bible_icon.png" alt="#"></a>
+            <a href="map.html"><img src="img/map_icon.png" alt="#"></a>
+            <a href="calender.html"><img src="img/calendar_icon.png" alt="#"></a>
+            <a href="bibleBot.html"><img src="img/AI_icon.png" alt="#"></a>
+        </div>
+    </div>
+    <div id='calendar'></div>
+    <script src="script/jquery-1.12.4.js"></script>
+    <script>
+        $('.menuSlide').mouseenter(function () {
+            $('header').stop().slideDown()
+        })
+        $('header').click(function () {
+            $('header').stop().fadeOut()
+        })
+
+        $(document).ready(function () {
+            $(".icon_menu").css({ 'transform': 'rotate(0deg)' }); // 초기 상태 설정
+
+            $(".icon_menu").click(function () {
+                $(".icon").stop().slideToggle();
+
+                // 현재 변환 상태를 확인하여 회전 각도를 설정
+                const currentTransform = $(this).css('transform');
+                if (currentTransform === 'none' || currentTransform === 'matrix(1, 0, 0, 1, 0, 0)') {
+                    $(this).css({ 'transform': 'rotate(90deg)' });
+                } else {
+                    $(this).css({ 'transform': 'rotate(0deg)' });
+                }
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                locale: 'ko', // 한글 설정
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+                },
+                initialDate: new Date(), // 오늘 날짜로 시작
+                navLinks: true, // can click day/week names to navigate views
+                businessHours: true, // display business hours
+                editable: true,
+                selectable: true,
+                buttonText: { // 버튼 텍스트를 한글로 설정
+                    today: '오늘',
+                    month: '월간',
+                    week: '주간',
+                    day: '일간',
+                    list: '목록'
+                },
+                dayCellDidMount: function (info) {
+                    // 요일에 따라 배경색 설정 (0: 일요일, 6: 토요일)
+                    const day = info.date.getDay();
+                    if (day === 0) {
+                        info.el.style.backgroundColor = '#FCC2A9'; // 빨간색
+                    } else if (day === 6) {
+                        info.el.style.backgroundColor = '#B8DFFF'; // 파란색
+                    } else {
+                        info.el.style.backgroundColor = '#ffff';
+                    }
+                },
+                events: [
+                    {
+                        title: '새해 첫날',
+                        start: '2025-01-01',
+                        allDay: true,
+                        color: '#FFD700' // 황금색
+                    },
+                    {
+                        title: '크리스마스',
+                        start: '2024-12-25',
+                        allDay: true,
+                        color: '#FF4500' // 빨간색
+                    },
+                    {
+                        title: '추석',
+                        start: '2025-09-17',
+                        allDay: true,
+                        color: '#228B22' // 녹색
+                    },
+                    {
+                        title: '어린이날',
+                        start: '2024-05-05',
+                        allDay: true,
+                        color: '#1E90FF' // 파란색
+                    },
+                    {
+                        title: '광복절',
+                        start: '2024-08-15',
+                        allDay: true,
+                        color: '#FF6347' // 주황색
+                    }
+                ],
+                select: function (info) {
+                    // 사용자에게 이벤트 제목을 입력받기
+                    var title = prompt('이벤트를 추가해보세요:');
+                    if (title) {
+                        calendar.addEvent({
+                            title: title,
+                            start: info.start,
+                            end: info.end,
+                            allDay: info.allDay,
+                            color: '#408fff',
+                        });
+                        alert('이벤트가 추가되었습니다!');
+                    }
+                    calendar.unselect(); // 선택 해제
+                },
+                eventClick: function (info) {
+                    // 이벤트 삭제 여부 확인
+                    if (confirm(`"${info.event.title}" 이벤트를 삭제하시겠습니까?`)) {
+                        info.event.remove();
+                        alert('이벤트가 삭제되었습니다!');
+                    }
+                },
+            });
+
+            calendar.render();
+        });
+    </script>
+</body>
+
+</html>
